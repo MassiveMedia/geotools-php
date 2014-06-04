@@ -1,4 +1,7 @@
 <?php
+
+namespace MassiveMedia;
+
 /**
  * Copyright (c) 2012, Jilles van Gurp
  *
