@@ -924,20 +924,18 @@ class GeoHash {
 	function geoHashesForCircle($length, $latitude, $longitude, $radius) {
 		// bit of a wet finger approach here: it doesn't make much sense to have
 		// lots of segments unless we have a long geohash or a large radius
-		$segments;
-		$suitableLength=getSuitableHashLength($radius,$latitude, $longitude);
+		$segments = 10;
+		$suitableLength=$this->getSuitableHashLength($radius,$latitude, $longitude);
 		if($length > $suitableLength - 3) {
 			$segments = 200;
 		} else if ($length > $suitableLength - 2) {
 			$segments = 100;
 		} else if ($length > $suitableLength - 1) {
 			$segments = 50;
-		} else {
-			// we don't seem to care about detail
-			$segments = 10;
 		}
-
-		$circle2polygon = $this -> geogeometry -> circle2polygon($segments, $latitude, $longitude, $radius);
+		$circle2polygon = $this->geogeometry->circle2polygon($segments, $latitude, $longitude, $radius);
+		
+		
 		return $this -> getGeoHashesForPolygon($length, $circle2polygon);
 	}
 
