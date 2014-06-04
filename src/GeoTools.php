@@ -942,4 +942,3 @@ class GeoHash {
 	}
 
 }
-?>
