@@ -413,8 +413,13 @@ class GeoHash {
 	protected $geogeometry;
 
 	public function __construct() {
+		$this->init();
+	}
+
+	public function init() {
 		$this->BASE32_DECODE_MAP = array_flip($this->BASE32_CHARS);
 		$this->geogeometry = new GeoGeometry();
+
 	}
 
 	/**
@@ -485,6 +490,12 @@ class GeoHash {
 		$isEven = TRUE;
 
 		for ($i = 0; $i < strlen($geoHash); $i++) {
+			if (!isset($this->BASE32_DECODE_MAP[$geoHash[$i]])) {
+				$this->init();
+			}
+			if (!isset($this->BASE32_DECODE_MAP[$geoHash[$i]])) {
+				continue; // weirdness!!!
+			}
 			$currentChar = $this->BASE32_DECODE_MAP[$geoHash[$i]];
 			for ($z = 0; $z < sizeof($this->BITS); $z++) {
 				$mask = $this->BITS[$z];
